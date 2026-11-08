@@ -20,9 +20,6 @@ Country Rush is a web-based geography game. The player tries to find as many cou
 - Country selection by clicking on the map
 - Timer, score, lives and accuracy display
 - Light and dark mode
-- Main menu, game screen and result screen
-- Leaderboard to show high scores
-- Saving scores with MongoDB
 - Simple interface that works on desktop browsers
 
 ## Libraries and Tools
