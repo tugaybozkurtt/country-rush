@@ -32,7 +32,9 @@ Country Rush is a web-based geography game. The player tries to find as many cou
 
 ## Interface Design
 
-The game will have a simple design with a modern world map. The timer and accuracy will be clearly visible. A light/dark mode button will be placed in the top-left corner.
+The game will have a simple design with a modern world map. The timer and accuracy will be clearly visible. A light/dark mode button will be placed in the top-left corner.   
+
+
 
 
 
