@@ -71,6 +71,8 @@ I added automatic map zoom, difficulty levels, answer animations and a leaderboa
 
 I used ChatGPT to learn about map creation, game mechanics, closures and how to fix JavaScript errors.
 
+https://tugaybozkurtt.github.io/country-rush/
+
 
 
 
