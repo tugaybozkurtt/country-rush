@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>COUNTRY RUSH</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JavaScript Libraries -->
+    <script defer
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js">
+    </script>
+
+    <script defer src="script.js"></script>
+</head>
+
+<body class="dark-theme">
+
+    <!-- Header -->
+    <header class="header">
+
+        <button id="themeBtn" class="theme-btn">
+            ☀ Açık Tema
+        </button>
+
+        <h1 class="logo">COUNTRY <span>RUSH</span></h1>
+
+        <button id="homeBtn" hidden>⌂ Ana Menü</button>
+
+    </header>
+
+    <!-- Main Menu -->
+    <section id="mainMenu" class="screen">
+
+        <div class="menu-content">
+
+            <h2 class="main-title">COUNTRY <span>RUSH</span></h2>
+
+            <p class="subtitle">
+                Dünyayı keşfet, zamana meydan oku!
+            </p>
+
+            <input type="text" id="playerName"
+                placeholder="Oyuncu adın"
+                aria-label="Oyuncu adı"
+                maxlength="20">
+
+            <button id="startBtn" class="primary-btn">
+                OYUNA BAŞLA
+            </button>
+
+            <button id="rulesBtn">
+                NASIL OYNANIR?
+            </button>
+
+            <button id="leaderboardBtn">
+                LİDERLİK TABLOSU
+            </button>
+
+            <div class="game-info">
+                <span>⏱ 60 Saniye</span>
+                <span>♥ 3 Can</span>
+                <span>★ +100 Puan</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Game Screen -->
+    <section id="gameScreen" class="screen" hidden>
+
+        <div class="dashboard">
+
+            <div class="stat-card">
+                <p>KALAN SÜRE</p>
+                <h2 id="timer">60</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>SKOR</p>
+                <h2 id="score">0</h2>
+            </div>
+
+            <div class="target-card">
+                <p>HARİTADA ÜLKEYİ BUL</p>
+                <h2 id="targetCountry">-</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>DOĞRULUK</p>
+                <h2 id="accuracy">0%</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>CAN</p>
+                <h2 id="lives">♥ ♥ ♥</h2>
+            </div>
+
+        </div>
+
+        <!-- Interactive Leaflet Map -->
+        <div id="map"></div>
+
+        <!-- Game Information -->
+        <div class="game-footer">
+
+            <div>
+                Zorluk:
+                <span id="difficulty">Kolay</span>
+            </div>
+
+            <div id="feedback" aria-live="polite"></div>
+
+            <div>
+                Soru:
+                <span id="questionNumber">1</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Result Screen -->
+    <section id="resultScreen" class="screen" hidden>
+
+        <div class="result-content">
+
+            <h2>OYUN SONUCU</h2>
+
+            <p>Toplam Puan</p>
+            <h1 id="finalScore">0</h1>
+
+            <div class="result-stats">
+
+                <div class="stat-card">
+                    <p>Doğru Cevap</p>
+                    <h2 id="correctCount">0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <p>Yanlış Cevap</p>
+                    <h2 id="wrongCount">0</h2>
+                </div>
+
+                <div class="stat-card">
+                    <p>Doğruluk</p>
+                    <h2 id="finalAccuracy">0%</h2>
+                </div>
+
+                <div class="stat-card">
+                    <p>Geçen Süre</p>
+                    <h2 id="elapsedTime">0</h2>
+                </div>
+
+            </div>
+
+            <div class="chart-container">
+                <canvas id="resultChart"></canvas>
+            </div>
+
+            <button id="restartBtn" class="primary-btn">
+                TEKRAR OYNA
+            </button>
+
+            <button id="resultMenuBtn">
+                ANA MENÜ
+            </button>
+
+            <button id="resultLeaderboardBtn">
+                LİDERLİK TABLOSU
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- Leaderboard Screen -->
+    <section id="leaderboardScreen" class="screen" hidden>
+
+        <div class="leaderboard-content">
+
+            <h2>LİDERLİK TABLOSU</h2>
+            <p>Bu tarayıcıdaki en iyi skorlar</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sıra</th>
+                        <th>Oyuncu</th>
+                        <th>Skor</th>
+                        <th>Doğruluk</th>
+                    </tr>
+                </thead>
+
+                <tbody id="leaderboardBody"></tbody>
+            </table>
+
+            <button id="backBtn">ANA MENÜ</button>
+
+        </div>
+
+    </section>
+
+    <!-- Game Rules -->
+    <dialog id="rulesModal">
+
+        <h2>NASIL OYNANIR?</h2>
+
+        <ul>
+            <li>Ülkeleri bulmak için 60 saniyen var.</li>
+            <li>Oyuna 3 can ile başlarsın.</li>
+            <li>Her doğru cevap 100 puan kazandırır.</li>
+            <li>Yanlış cevapta 1 can kaybedersin.</li>
+            <li>Haritada sorulan ülkeye tıkla.</li>
+            <li>Sorular kolaydan zora doğru ilerler.</li>
+            <li>Süre veya canların bittiğinde oyun sona erer.</li>
+        </ul>
+
+        <button id="closeRulesBtn">KAPAT</button>
+
+    </dialog>
+
+</body>
+</html>
+  
